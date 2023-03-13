@@ -19,9 +19,7 @@ public class MyObject {
 //	public void setState_province(String state_province) {
 //		this.state_province = state_province;
 //	}
-	public List<String> getDomain() {
-		return domain;
-	}
+
 	public MyObject(List<String> domain, String country, List<String> web_pages, String name, String alpha_two_code) {
 		super();
 		this.domain = domain;
@@ -29,6 +27,10 @@ public class MyObject {
 		this.web_pages = web_pages;
 		this.name = name;
 		this.alpha_two_code = alpha_two_code;
+	}
+	
+	public List<String> getDomain() {
+		return domain;
 	}
 	public void setDomain(List<String> domain) {
 		this.domain = domain;

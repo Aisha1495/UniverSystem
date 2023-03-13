@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 
@@ -52,7 +54,6 @@ public class MainUniver {
 
 	    	//create table setting
 			 String sql1="CREATE TABLE universite (" 
-					 + "state_province text, "
 					 + "domain text,"
 					 + "country text,"
 					 + "web_pages text,"
@@ -60,7 +61,7 @@ public class MainUniver {
 					 + "alpha_two_code text"
 					 + ");";
 			 
-	    	 //System.out.println("craeted to SQL database");
+	    	 System.out.println("craeted to SQL database");
 	    		//st.execute(sql1);
 	
     		
@@ -89,38 +90,37 @@ public class MainUniver {
     	            conn.disconnect();
     	            
     	            Gson gson = new Gson();
-    	            List<MyObject> myObj = gson.fromJson(json.toString(), ArrayList.class);
+    	           //List<MyObject> myObj = gson.fromJson(json.toString(), ArrayList.class);
+   	            
     	            
-    	            // Use myObj for further processing
+
     	            
-    	            
-    	            
-    	            
-//    	            String sql = "INSERT INTO Univer (state_province,domain,country,web_pages,name,alpha_two_code)"+
-//   						 "VALUES ("+"'"+myObj.getState_province()+"','"+myObj.getDomain()+"','"+myObj.getName()+"','"+myObj.getWeb_pages()+"','"++"','"++ "')";
-//   		System.out.println(sql);
-//   	        	st.execute(sql);    
-//    		
-//    		 BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Lenovo\\eclipse-workspace\\UniversitiesProject\\src\\Universitie\\univ.txt"));
-//    		 StringBuilder jsonString = new StringBuilder();
-//    		 String line;
-//    		 while ((line = reader.readLine()) != null) {
-//    		 jsonString.append(line);
-//    		 }
-//    		 reader.close();
-//    		 JSONArray universities = new JSONArray(jsonString.toString());
-//    		 for (int i = 0; i < universities.length(); i++) {
-//    		 JSONObject university = universities.getJSONObject(i);
-//    		 String name = university.getString("name");
-//    		 String country = university.getString("country");
-//    		 System.out.println(name + " - " + country);
-    	      //  }
+   	      java.lang.reflect.Type listType = new TypeToken<ArrayList<MyObject>>() {}.getType();
+    	      List<MyObject> myObj = gson.fromJson(json.toString(), listType);   
+    	      
+    	      String insertSql = "INSERT INTO Universities (domains, country, web_pages, name, alpha_two_code) VALUES (?, ?, ?, ?, ?)";
+    	      PreparedStatement ps = con.prepareStatement(insertSql);
+    	      for (MyObject obj : myObj) {
+    	      List<String> domain = obj.getDomain();
+    	      String country = obj.getCountry();
+    	      List<String> webPages = obj.getWeb_pages();
+    	      String webPagesString = String.join(",", webPages);
+    	      String name = obj.getName();
+    	      String alpha_two_code = obj.getAlpha_two_code();
+    	      ps.setString(1, String.join(",", domain));
+    	      ps.setString(2, country);
+    	      ps.setString(3, webPagesString);
+    	      ps.setString(4, name);
+    	      ps.setString(5, alpha_two_code);
+    	      ps.executeUpdate();
+    	      }
+
     		 
     	}catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}catch (Exception e) {
-		System.out.println(e);
+		System.err.println(e);
 }
 }   
 }
