@@ -4,36 +4,38 @@ import java.util.List;
 
 public class MyObject {
 
-	
-	//private String state_province;
-	private List<String> domain;
+	private List<String> domains;
 	private String country;
 	private List<String> web_pages;
 	private String name;
 	private String alpha_two_code;
 	
 	
-//	public String getState_province() {
-//		return state_province;
-//	}
-//	public void setState_province(String state_province) {
-//		this.state_province = state_province;
-//	}
-
-	public MyObject(List<String> domain, String country, List<String> web_pages, String name, String alpha_two_code) {
+	
+	public MyObject(String state_province, List<String> domains, String country, List<String> web_pages, String name,
+			String alpha_two_code) {
 		super();
-		this.domain = domain;
+		//this.state_province = state_province;
+		this.domains = domains;
 		this.country = country;
 		this.web_pages = web_pages;
 		this.name = name;
 		this.alpha_two_code = alpha_two_code;
 	}
-	
-	public List<String> getDomain() {
-		return domain;
+public MyObject() {
+		// TODO Auto-generated constructor stub
 	}
-	public void setDomain(List<String> domain) {
-		this.domain = domain;
+	//	public String getState_province() {
+//		return state_province;
+//	}
+//	public void setState_province(String state_province) {
+//		this.state_province = state_province;
+//	}
+	public List<String> getDomains() {
+		return domains;
+	}
+	public void setDomains(List<String> domains) {
+		this.domains = domains;
 	}
 	public String getCountry() {
 		return country;
@@ -60,6 +62,6 @@ public class MyObject {
 		this.alpha_two_code = alpha_two_code;
 	}
 	
-
 	
+
 }
