@@ -22,6 +22,14 @@ public class MyObject {
 	public List<String> getDomain() {
 		return domain;
 	}
+	public MyObject(List<String> domain, String country, List<String> web_pages, String name, String alpha_two_code) {
+		super();
+		this.domain = domain;
+		this.country = country;
+		this.web_pages = web_pages;
+		this.name = name;
+		this.alpha_two_code = alpha_two_code;
+	}
 	public void setDomain(List<String> domain) {
 		this.domain = domain;
 	}

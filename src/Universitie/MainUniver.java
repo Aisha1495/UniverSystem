@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -58,14 +60,14 @@ public class MainUniver {
 					 + "alpha_two_code text"
 					 + ");";
 			 
-	    	 System.out.println("craeted to SQL database");
+	    	 //System.out.println("craeted to SQL database");
 	    		//st.execute(sql1);
 	
     		
 	    		
 	    		// api
 	    		
-    			String apiUrl = "http://universities.hipolabs.com/search?country=%3ccountry";
+    			String apiUrl = "http://universities.hipolabs.com/search?country=Oman";
     	        try {
     	            URL url1 = new URL(apiUrl);
     	            HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -87,11 +89,9 @@ public class MainUniver {
     	            conn.disconnect();
     	            
     	            Gson gson = new Gson();
-    	            MyObject myObj = gson.fromJson(json.toString(), MyObject.class);
+    	            List<MyObject> myObj = gson.fromJson(json.toString(), ArrayList.class);
     	            
     	            // Use myObj for further processing
-    	            
-
     	            
     	            
     	            
