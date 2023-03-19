@@ -61,6 +61,12 @@ public class MainUniver {
 			 System.out.println("databas craeted");
 	   // st.execute(sql1);
  		     
+			 System.out.print("Enter the country name: ");
+			 String countryName = scanner.nextLine();
+			 String apiUrl1 = "http://universities.hipolabs.com/search?country=" + countryName;
+			 System.out.println(countryName);
+			 		             
+			 
 			 String apiUrl = "http://universities.hipolabs.com/search?country=Canada";
 		        try {
 		            URL url1 = new URL(apiUrl);
@@ -105,9 +111,9 @@ public class MainUniver {
 		                ps.setString(5, alpha_two_code);
 
 		               ps.executeUpdate();
-		            }
+		               
 
-		            
+		            }
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        }
