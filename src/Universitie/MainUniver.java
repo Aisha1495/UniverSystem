@@ -46,7 +46,7 @@ public class MainUniver {
 	   	 
 	   	 
 	   	 String backupPath = "C:\\Users\\Lenovo\\eclipse-workspace\\UniversitiesProject\\backups.bak"; // specify the path for the backup file
-		 String backupSql = "BACKUP DATABASE Universities TO DISK = '" + backupPath + "'";
+		 String backupSql = "BACKUP DATABASE Univer TO DISK = '" + backupPath + "'";
 
 		 
 		 
@@ -126,7 +126,7 @@ public class MainUniver {
 		               
 
 		            }
-		            
+		            System.out.println(backupSql);
 		            st.execute(backupSql);
 		            System.out.println("Database backup created at " + backupPath);
 		        } catch (Exception e) {
