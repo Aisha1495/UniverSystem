@@ -42,6 +42,14 @@ public class MainUniver {
 	   	 }
 	   	 Connection con = null;
 	   	 System.out.println("System is in prograss:");
+	   	 
+	   	 
+	   	 
+	   	 String backupPath = "C:\\Users\\Lenovo\\eclipse-workspace\\UniversitiesProject\\backups.bak"; // specify the path for the backup file
+		 String backupSql = "BACKUP DATABASE Universities TO DISK = '" + backupPath + "'";
+
+		 
+		 
 	   	 try {
 	   	 // create a new table
 	   	 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
@@ -50,6 +58,12 @@ public class MainUniver {
 	   	 Statement st = con.createStatement();
 	
 		
+	     System.out.print("Enter the country name: ");
+		 String countryName = scanner.nextLine();
+		 String Url1 = "http://universities.hipolabs.com/search?country=Canada" + countryName;
+		 System.out.println(countryName);
+        /////
+	   	 
 		 String sql1= "Create table UniversitiesCanada ("
 //				 + " state_province text ,"
 				 + " domains text ,"
@@ -60,16 +74,14 @@ public class MainUniver {
 				 + ");";
 			 System.out.println("databas craeted");
 	   // st.execute(sql1);
- 		     
-			 System.out.print("Enter the country name: ");
-			 String countryName = scanner.nextLine();
-			 String apiUrl1 = "http://universities.hipolabs.com/search?country=" + countryName;
-			 System.out.println(countryName);
-			 		             
+ 		    
 			 
+			
 			 String apiUrl = "http://universities.hipolabs.com/search?country=Canada";
 		        try {
 		            URL url1 = new URL(apiUrl);
+		            
+		            
 		            HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
 		            conn.setRequestMethod("GET");
 		            conn.setRequestProperty("Accept", "application/json");
@@ -114,6 +126,9 @@ public class MainUniver {
 		               
 
 		            }
+		            
+		            st.execute(backupSql);
+		            System.out.println("Database backup created at " + backupPath);
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        }
